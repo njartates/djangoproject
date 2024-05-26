@@ -1,0 +1,37 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+List of user
+{% endblock title %} 
+
+{% block content %}
+
+<a href="/user/create" class="btn btn-success float-end mt-1 me-1">Add user</a>
+{% include "include/messages.html" %}
+<div class="col-md-6 mx-auto">   
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                     <th>USER ID</th>
+                     <th>FIRST NAME</th>
+                     <th>MIDDLE NAME</th>
+                     <th>LAST NAME</th>
+                     <th>GENDER ID</th>
+                     <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{user.first_name}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}
+
