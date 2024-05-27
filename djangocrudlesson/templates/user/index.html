@@ -24,7 +24,18 @@ List of user
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td>{{user.first_name}}</td>
+                        <td>{{ user.user_id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.middle_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>  
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-primary">View</a>
+                                <a href="#" class="btn btn-success">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

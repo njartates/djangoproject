@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Gender, User
+from .models import Gender,User
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 
@@ -63,17 +63,17 @@ def destroy_gender(request, gender_id):
     return redirect('/genders')
 
 def index_user(request):
-    users = User.objects.all()
+    users = User.objects.select_related('gender')
     
     context = {
-        'users' : users,
+        'users':users,
     }
     
     return render(request, 'user/index.html', context)
 
 
 def create_user(request):
-    genders = Gender.objects.all()
+    genders = Gender.objects.all() # SELECT * from genders
     
     context = {
         'genders' : genders
