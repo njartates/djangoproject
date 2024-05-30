@@ -62,6 +62,56 @@ def destroy_gender(request, gender_id):
     
     return redirect('/genders')
 
+
+def show_user(request, user_id):
+    user = User.objects.get(pk=user_id) # SELECT * FORM GENDER WHERE gender_id = gender_id
+    
+    context = {
+        'user': user,
+    }
+    return render(request, 'user/show.html', context) 
+
+def edit_user(request, user_id):
+    user = User.objects.get(pk=user_id)
+    genders = Gender.objects.all()
+    
+    context = {
+        'user': user,
+        'genders':genders,
+    }
+    return render(request, 'user/edit.html', context) 
+
+
+def update_user(request, user_id):
+    firstName = request.POST.get('firstName')
+    middleName = request.POST.get('middleName')
+    lastName = request.POST.get('lastName')
+    genderID =  request.POST.get('gender_id')
+    username = request.POST.get('username')
+    
+    
+    User.objects.filter(pk=user_id).update(first_name=firstName, middle_name=middleName, last_name=lastName, gender_id=genderID, username=username) 
+    messages.success(request, 'Gender successfully updated.')
+    
+    return redirect('/users')
+
+
+def delete_user(request, user_id):
+    user =  User.objects.get(pk=user_id)
+   
+    context = {
+        'user': user,
+    }
+    
+    return render(request, 'user/delete.html', context) 
+
+
+def destroy_user(request, user_id):
+    User.objects.filter(pk=user_id).delete()
+    messages.success(request, 'Gender is successfully deleted.')
+    
+    return redirect('/users')
+
 def index_user(request):
     users = User.objects.select_related('gender')
     
@@ -103,3 +153,5 @@ def store_user(request):
     else: 
         messages.error(request, 'Password do not match')
         return redirect('/user/create')
+    
+    
