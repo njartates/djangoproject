@@ -149,7 +149,7 @@ def store_user(request):
         
         messages.success(request, 'User successfully saved.')
         
-        return redirect('/users')
+        return redirect('/')
     else: 
         messages.error(request, 'Password do not match')
         return redirect('/user/create')
